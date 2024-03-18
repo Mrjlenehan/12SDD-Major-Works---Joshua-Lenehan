@@ -19,15 +19,12 @@
 
 
     <script>
-      var clicked = (false)
       document.getElementById("SButton").addEventListener("click",Next)
- 
+      var questionNum = 0
 
       function Next(){
-        var clicked = (true)
-        google.script.run.next(clicked)
-        var clicked = (false)
-        google.script.run.withSuccessHandler(replaceQuestion).retrieveQuestions();
+        var questionNum = Math.floor(Math.random()*20) + 1
+        google.script.run.withSuccessHandler(replaceQuestion).retrieveQuestions(questionNum);
       }
 
 

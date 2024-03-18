@@ -17,7 +17,7 @@ function  getUrl () {
 
 function doPost(e){
    Logger.log(JSON.stringify(e))
-    if(e.parameter.Button1 == 'StartButton'){ 
+    if(e.parameter.Button1 == 'Start'){ 
     var htmlOutput =  HtmlService.createTemplateFromFile('Test');
     htmlOutput.title = 'Dashbord:'; 
     return htmlOutput.evaluate();
@@ -34,15 +34,10 @@ function doPost(e){
 
 
 
-function next(clicked){
-  Logger.log(clicked);
 
+function retrieveQuestions(questionNum){
 
-}
-
-function retrieveQuestions(){
-
-  var question = Pdhpe.getRange(1 , 2).getValue();
+  var question = Pdhpe.getRange(questionNum , 1).getValue();
   return question;
 
 }
