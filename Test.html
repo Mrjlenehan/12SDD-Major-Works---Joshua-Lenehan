@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <div><h1> HSC Past Paper Multiple Choice </h1><h1>Year</h1>
+    <h2 id = "QName"> Question 1 </h2>
+    <div><h3>This is a test question</h3></div>
+    <div>Answer A</div>
+    <div>Answer B</div>
+    <div>Answer C</div>
+    <div>Answer D</div>
+    <button id="SButton">Start / Next Question</button>
+    <?var url = getUrl();?>
+    <form method="post" action="<?= url ?>" > 
+    <input type="submit" value="BackButton"name="Button2">
+    </form>
+
+
+    <script>
+      var clicked = (false)
+      document.getElementById("SButton").addEventListener("click",Next)
+ 
+
+      function Next(){
+        var clicked = (true)
+        google.script.run.next(clicked)
+        var clicked = (false)
+        google.script.run.withSuccessHandler(replaceQuestion).retrieveQuestions();
+      }
+
+
+
+      function replaceQuestion(question){
+
+        document.getElementById("QName").textContent = question
+      }
+
+    </script>
+  </body>
+</html>
