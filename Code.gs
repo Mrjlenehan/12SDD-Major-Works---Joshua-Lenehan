@@ -67,12 +67,15 @@ function retrieveAnswerFour(questionNum){
 }
 
 function retrieveAnswer(userAns,questionNum){
-  var correct = false;
-  var answer = Pdhpe.getRange(questionNum, 6).getValue()
+  var correct = "wrong";
+  var answerRay = ["", ""]
+  var answer = Pdhpe.getRange(questionNum, 6).getValue();
   if (userAns == answer){
-    var correct = true;
+    var correct = "correct";
   }
-  return correct
+  answerRay[0]=correct
+  answerRay[1]=answer
+  return answerRay
 }
 
 
