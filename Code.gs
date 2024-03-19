@@ -42,3 +42,23 @@ function retrieveQuestions(questionNum){
 
 }
 
+function retrieveAnswerOne(questionNum){
+  var AOne = Pdhpe.getRange(questionNum, 2).getValue()
+  return AOne
+}
+
+function retrieveAnswerTwo(questionNum){
+  var ATwo = Pdhpe.getRange(questionNum, 3).getValue()
+  return ATwo
+}
+
+function retrieveAnswerThree(questionNum){
+  var AThree = Pdhpe.getRange(questionNum, 4).getValue()
+  return AThree
+}
+
+function retrieveAnswerFour(questionNum){
+  var AFour = Pdhpe.getRange(questionNum, 5).getValue()
+  return AFour
+}
+
