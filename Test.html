@@ -28,9 +28,17 @@
     <script>
       document.getElementById("SButton").addEventListener("click",Next)
       var questionNum = 0
+      var userAns = ""
+      document.getElementById("ChoiceA").addEventListener("click",AnsA)
+      document.getElementById("ChoiceB").addEventListener("click",AnsB)
+      document.getElementById("ChoiceC").addEventListener("click",AnsC)
+      document.getElementById("ChoiceD").addEventListener("click",AnsD)
+
+
 
       function Next(){
-        var questionNum = Math.floor(Math.random()*20) + 1
+        questionNum = Math.floor(Math.random()*20) + 1
+        var userAns = ""
         google.script.run.withSuccessHandler(replaceQuestion).retrieveQuestions(questionNum);
         google.script.run.withSuccessHandler(replaceYear).retrieveYear(questionNum);
         google.script.run.withSuccessHandler(replaceAnswerOne).retrieveAnswerOne(questionNum);
@@ -65,6 +73,32 @@
 
       function replaceAnswerFour(AnswerFour){
         document.getElementById("QFour").textContent = "D. " + AnswerFour
+      }
+
+      function AnsA(){
+        var userAns = "A"
+        google.script.run.withSuccessHandler(CheckAnswer).retrieveAnswer(userAns,questionNum)
+
+      }
+
+      function AnsB(){
+        var userAns = "B"
+        google.script.run.withSuccessHandler(CheckAnswer).retrieveAnswer(userAns,questionNum)
+      }
+
+      function AnsC(){
+        var userAns = "C"
+        google.script.run.withSuccessHandler(CheckAnswer).retrieveAnswer(userAns,questionNum)
+      }
+
+      function AnsD(){
+        var userAns = "D"
+        google.script.run.withSuccessHandler(CheckAnswer).retrieveAnswer(userAns,questionNum)
+      }
+
+      function CheckAnswer(Checked){
+        alert(Checked)
+
       }
 
     </script>

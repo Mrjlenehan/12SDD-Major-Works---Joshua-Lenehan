@@ -66,3 +66,16 @@ function retrieveAnswerFour(questionNum){
   return AFour
 }
 
+function retrieveAnswer(userAns,questionNum){
+  var correct = false;
+  var answer = Pdhpe.getRange(questionNum, 6).getValue()
+  if (userAns == answer){
+    var correct = true;
+  }
+  return correct
+}
+
+
+
+
+
