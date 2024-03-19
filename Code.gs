@@ -39,7 +39,11 @@ function retrieveQuestions(questionNum){
 
   var question = Pdhpe.getRange(questionNum , 1).getValue();
   return question;
+}
 
+function retrieveYear(questionNum){
+  var QYear = Pdhpe.getRange(questionNum, 7).getValue()
+  return QYear
 }
 
 function retrieveAnswerOne(questionNum){
