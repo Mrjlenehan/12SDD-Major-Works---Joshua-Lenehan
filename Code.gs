@@ -6,75 +6,95 @@ function doGet(e) {
 
 }
 
+
 var id = "1TPZQT-IbFCgTNSzJ4ZIJiw_slmi8FpU4-HDUnyfvv8k";
 var spreadsheet = SpreadsheetApp.openById(id);
-var Pdhpe  = spreadsheet.getSheetByName("PE 2021");
+var subjects = []
+subjects[0]  = spreadsheet.getSheetByName("PE");
+subjects[1] = spreadsheet.getSheetByName("Physics")
+
+
+function retrieveLength(sub){
+  var length = subjects[sub].getDataRange().getNumRows();
+  return length
+}
 
 function  getUrl () {
  var url = ScriptApp.getService().getUrl();
  return url;
 }
 
+
+
 function doPost(e){
    Logger.log(JSON.stringify(e))
-    if(e.parameter.Button1 == 'Start'){ 
-    var htmlOutput =  HtmlService.createTemplateFromFile('Test');
-    htmlOutput.title = 'Dashbord:'; 
-    return htmlOutput.evaluate();
-    }if(e.parameter.Button2 == 'BackButton'){
-    var htmlOuptut = HtmlService.createTemplateFromFile('Title');
-    htmlOuptut.title = 'Home';
-    return htmlOuptut.evaluate();
+    if(e.parameter.Button1 == 'PDHPE'){ 
+      var htmlOutput =  HtmlService.createTemplateFromFile('PDHPE');
+      htmlOutput.title = 'PDHPE:'; 
+      return htmlOutput.evaluate();
+    }if(e.parameter.Button2 == 'Back To Home Screen'){
+      var htmlOuptut = HtmlService.createTemplateFromFile('Title');
+      htmlOuptut.title = 'Home';
+      return htmlOuptut.evaluate();
+    }if(e.parameter.Button3== 'Physics'){
+      var htmlOuptut = HtmlService.createTemplateFromFile('Physics');
+      htmlOuptut.title = 'Physics:' ;
+      return htmlOuptut.evaluate();
     }else{
-    var htmlOutput =  HtmlService.createTemplateFromFile('error');
-    htmlOutput.title = 'error:'; 
-    return htmlOutput.evaluate();
+      var htmlOutput =  HtmlService.createTemplateFromFile('error');
+      htmlOutput.title = 'error:'; 
+      return htmlOutput.evaluate();
     }
     }
 
 
 
 
-function retrieveQuestions(questionNum){
-
-  var question = Pdhpe.getRange(questionNum , 1).getValue();
+function retrieveQuestions(questionNum, sub){
+  var question = subjects[sub].getRange(questionNum , 1).getValue();
   return question;
 }
 
-function retrieveYear(questionNum){
-  var QYear = Pdhpe.getRange(questionNum, 7).getValue()
+function retrieveYear(questionNum, sub){
+  var QYear = subjects[sub].getRange(questionNum, 7).getValue()
   return QYear
 }
 
-function retrieveAnswerOne(questionNum){
-  var AOne = Pdhpe.getRange(questionNum, 2).getValue()
+function retrieveAnswerOne(questionNum, sub){
+  var AOne = subjects[sub].getRange(questionNum, 2).getValue()
   return AOne
 }
 
-function retrieveAnswerTwo(questionNum){
-  var ATwo = Pdhpe.getRange(questionNum, 3).getValue()
+function retrieveAnswerTwo(questionNum, sub){
+  var ATwo = subjects[sub].getRange(questionNum, 3).getValue()
   return ATwo
 }
 
-function retrieveAnswerThree(questionNum){
-  var AThree = Pdhpe.getRange(questionNum, 4).getValue()
+function retrieveAnswerThree(questionNum, sub){
+  var AThree = subjects[sub].getRange(questionNum, 4).getValue()
   return AThree
 }
 
-function retrieveAnswerFour(questionNum){
-  var AFour = Pdhpe.getRange(questionNum, 5).getValue()
+function retrieveAnswerFour(questionNum, sub){
+  var AFour = subjects[sub].getRange(questionNum, 5).getValue()
   return AFour
 }
 
-function retrieveAnswer(userAns,questionNum){
+function retrieveImage(questionNum, sub){
+  var AImage = subjects[sub].getRange(questionNum, 8).getValue()
+  return AImage
+}
+
+function retrieveAnswer(userAns,questionNum,sub){
   var correct = "wrong";
   var answerRay = ["", ""]
-  var answer = Pdhpe.getRange(questionNum, 6).getValue();
+  var answer = subjects[sub].getRange(questionNum, 6).getValue();
   if (userAns == answer){
     var correct = "correct";
   }
   answerRay[0]=correct
   answerRay[1]=answer
+  answerRay[2]=userAns
   return answerRay
 }
 
