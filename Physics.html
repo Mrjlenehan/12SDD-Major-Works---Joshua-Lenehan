@@ -3,7 +3,7 @@
   <head>
     <base target="_top">
   </head>
-  <body>
+  <body onload="Next()">
     <div><h1> Physics HSC Past Paper Multiple Choice </h1><h2 id="QYear">Year</h2>
     <h3 id = "QName"> Question 1 </h3>
     <div id="QOne">Answer A</div>
@@ -24,6 +24,8 @@
     <input type="submit" class="btn" value="Back To Home Screen"name="Button2">
     </form>
 
+    <img id="img" src="" >
+
     <div id="correct"></div>
 
 
@@ -39,6 +41,8 @@
       document.getElementById("ChoiceD").addEventListener("click",AnsD)
       google.script.run.withSuccessHandler(enableRay).retrieveLength(sub)
 
+      var image = document.getElementById("img");
+
       function enableRay(length){
       while (length >= 0){
         unique[length] = false
@@ -47,6 +51,7 @@
       }
 
       function Next(){
+        image.src = ""
         do{
           questionNum = Math.floor(Math.random()*20) + 1
         }
@@ -55,6 +60,7 @@
         document.getElementById("correct").textContent = ""
           google.script.run.withSuccessHandler(replaceQuestion).retrieveQuestions(questionNum, sub);
           google.script.run.withSuccessHandler(replaceYear).retrieveYear(questionNum, sub);
+          google.script.run.withSuccessHandler(replaceImage).retrieveImage(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerOne).retrieveAnswerOne(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerTwo).retrieveAnswerTwo(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerThree).retrieveAnswerThree(questionNum, sub);
@@ -63,6 +69,10 @@
         unique[questionNum] = true
       }
 
+
+      function replaceImage(SRC){
+        image.src = SRC
+      }
 
 
       function replaceQuestion(question){
