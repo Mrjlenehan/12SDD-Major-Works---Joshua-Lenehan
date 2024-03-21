@@ -24,10 +24,13 @@
     <input type="submit" class="btn" value="Back To Home Screen"name="Button2">
     </form>
 
+    <div id="correct"></div>
+
+
     <img id="img" src="" >
 
 
-    <div id="correct"></div>
+
 
 
     <script>
@@ -54,6 +57,7 @@
 
 
       function Next(){
+        image.style.display = "none";
         image.src = ""
         do{
           questionNum = Math.floor(Math.random()*20) + 2
@@ -67,11 +71,15 @@
           google.script.run.withSuccessHandler(replaceAnswerTwo).retrieveAnswerTwo(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerThree).retrieveAnswerThree(questionNum, sub);
           google.script.run.withSuccessHandler(replaceImage).retrieveImage(questionNum, sub);
+          google.script.run.withSuccessHandler(showImage).retrieveHide(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerFour).retrieveAnswerFour(questionNum, sub);
 
         unique[questionNum] = true
       }
 
+      function showImage(hidden){
+        image.style.display = hidden;
+      }
 
 
       function replaceQuestion(question){

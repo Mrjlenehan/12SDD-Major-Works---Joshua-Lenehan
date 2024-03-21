@@ -55,6 +55,11 @@ function retrieveQuestions(questionNum, sub){
   return question;
 }
 
+function retrieveHide(quesitonNum, sub){
+  var hide = subjects[sub].getRange(quesitonNum, 9).getValue();
+  return hide
+}
+
 function retrieveYear(questionNum, sub){
   var QYear = subjects[sub].getRange(questionNum, 7).getValue()
   return QYear
