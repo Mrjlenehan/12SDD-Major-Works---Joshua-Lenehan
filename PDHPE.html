@@ -4,6 +4,7 @@
     <base target="_top">
   </head>
   <body onload="Next()">
+  <!-- The onload function is a primary read to load up the first question without requiring to press the button -->
     <div><h1> PDHPE HSC Past Paper Multiple Choice </h1><h2 id="QYear">Year</h2>
     <h3 id = "QName"> Question 1 </h3>
     <div id="QOne">Answer A</div>
@@ -19,16 +20,19 @@
     </div>
 
     <button id="SButton" class="btn">Next Question</button>
+    <!-- The url is stored as a variable -->
     <?var url = getUrl();?>
+    <!-- The post action is able to affect the url after the first load and is repeating constantly -->
     <form method="post" action="<?= url ?>" > 
+      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
     <input type="submit" class="btn" value="Back To Home Screen"name="Button2">
     </form>
 
+
+ <!-- although the answer and images exist they are only empty containers ready to be re written -->
     <div id="correct"></div>
-
-
     <img id="img" src="" >
-
+    <img id="img2" src="" >
 
 
 
@@ -39,16 +43,20 @@
       var userAns = ""
       var unique = []
       var sub = 0
+      // This set of click listeners is checking for the users answer
       document.getElementById("ChoiceA").addEventListener("click",AnsA)
       document.getElementById("ChoiceB").addEventListener("click",AnsB)
       document.getElementById("ChoiceC").addEventListener("click",AnsC)
       document.getElementById("ChoiceD").addEventListener("click",AnsD)
+      // This attempts to run the enable retrieve length function and if it is successful it runs the function and retrieves the length of rows in the sheet which is passed into the enableray function that resets all the flags for the unique array
       google.script.run.withSuccessHandler(enableRay).retrieveLength(sub)
 
       var image = document.getElementById("img");
+      var image2 = document.getElementById("img2");
 
       function enableRay(length){
       while (length >= 0){
+        // this will be used to see if a question has been shown yet
         unique[length] = false
         length = length - 1
       }
@@ -59,19 +67,25 @@
       function Next(){
         image.style.display = "none";
         image.src = ""
+        image2.style.display = "none"
+        image2.src = ""
+        // it needs to reset all images before next question
         do{
           questionNum = Math.floor(Math.random()*20) + 2
+          // funds a random number that has a correlating question
         }
         while (unique[questionNum] == true)
+        // This runs the randomiser until a unique number is found through checking the flag of each number.
         var userAns = ""
         document.getElementById("correct").textContent = ""
+        // This block of questions runs the functions to retrieve the information for the question and then pass it to a function that replaces each element
           google.script.run.withSuccessHandler(replaceQuestion).retrieveQuestions(questionNum, sub);
           google.script.run.withSuccessHandler(replaceYear).retrieveYear(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerOne).retrieveAnswerOne(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerTwo).retrieveAnswerTwo(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerThree).retrieveAnswerThree(questionNum, sub);
-          google.script.run.withSuccessHandler(replaceImage).retrieveImage(questionNum, sub);
-          google.script.run.withSuccessHandler(showImage).retrieveHide(questionNum, sub);
+          google.script.run.withSuccessHandler(replaceImage2).retrieveImage2(questionNum, sub);
+          google.script.run.withSuccessHandler(showImage2).retrieveHide2(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerFour).retrieveAnswerFour(questionNum, sub);
 
         unique[questionNum] = true
@@ -79,21 +93,38 @@
 
       function showImage(hidden){
         image.style.display = hidden;
+        // This is used to remove the small img icon
       }
 
 
       function replaceQuestion(question){
         document.getElementById("QName").textContent = "Q. " + question
+        // replaces the question element with the retrieved question
       }
 
       function replaceYear(Year){
         document.getElementById("QYear").textContent = "Year " + Year
+        // replaces year element with the returned year
       }
 
       function replaceImage(SRC){
         image.src = SRC
+        // replaces the src value of the image icon to display the correct image
       }
 
+      function showImage2(hidden){
+        image2.style.display = hidden;
+        // also hides the second image icon
+      }
+
+
+      function replaceImage2(SRC){
+        image2.src = SRC
+        // replaces the source of the second image if needed
+      }
+
+
+      // These next 4 functions replace each option element with the current options
       function replaceAnswerOne(AnswerOne){
         document.getElementById("QOne").textContent = "A. " + AnswerOne
       }
@@ -112,6 +143,9 @@
         document.getElementById("QFour").textContent = "D. " + AnswerFour
       }
 
+
+
+      // These four functions check the answer that the user has clicked through retrieving the correct answer from the sheet
       function AnsA(){
         var userAns = "A"
         google.script.run.withSuccessHandler(CheckAnswer).retrieveAnswer(userAns,questionNum,sub)
@@ -133,13 +167,17 @@
         google.script.run.withSuccessHandler(CheckAnswer).retrieveAnswer(userAns,questionNum,sub)
       }
 
+
+      // This function displays the correct answer
       function CheckAnswer(Checked){
         if(Checked[0] == "correct"){
+          // changes the colour of the elements text to match correctness
           document.getElementById("correct").style.color = 'green';
         }
         else{
           document.getElementById("correct").style.color = 'red'
         }
+        // Actual replacement of empty element into the answer and the users choice
         document.getElementById("correct").textContent ="You chose " + Checked[2] + " Which is " + Checked[0] + " because the correct answer was " + Checked[1];
       }
 
@@ -148,19 +186,19 @@
     <style>
 body {
     font-family: Arial, sans-serif;
-    background-color: #000; /* Black */
-    color: #f1c40f; /* Yellow */
+    background-color: #F7F4EA; /* Black */
+    color: #003366; /* Yellow */
     margin: 0;
     padding: 0;
     position: relative; /* Set body position to relative */
 }
 
 h1, h2 {
-    color: #f1c40f; /* Yellow */
+    color: #003366; /* Yellow */
     font-size:50px;
 }
 h3{
-  color: #f1c40f; /* Yellow */
+  color: #003366; /* Yellow */
   font-size:30px;
 }
 
@@ -174,9 +212,9 @@ div {
 }
 
 input[type="button"] {
-    background-color: #3498db; /* Blue */
+    background-color: #7768B6; /* Blue */
     border: none;
-    color: white;
+    color: #75C9C8;
     padding: 20px 40px; /* Larger padding */
     text-align: center;
     text-decoration: none;
@@ -188,20 +226,20 @@ input[type="button"] {
 }
 
 #SButton {
-    background-color: #3498db; /* Blue */
-    color: white;
+    background-color: #7768B6; /* Blue */
+    color: #75C9C8;
     padding: 30px 60px; /* Larger padding */
     font-size: 28px; /* Larger font size */
     margin: 20px 0; /* Add margin between button and options */
 }
 #SButton:hover {
-  background-color: #000080; /* navy */
-  color: #B90E0A;
+  background-color: #C0B9DD; /* navy */
+  color: #338483;
 }
 
 input[type="submit"] {
-    background-color: #3498db; /* Blue */
-    color: white;
+    background-color: #7768B6; /* Blue */
+    color: #75C9C8;
     padding: 15px 30px; /* Larger padding */
     text-align: center;
     text-decoration: none;
@@ -232,8 +270,8 @@ form {
     grid-gap: 20px; /* Add gap between buttons */
 }
 .btn:hover {
-  background-color: #FFFFFF; /* white */
-  color: #B90E0A;
+  background-color: #C0B9DD; /* white */
+  color: #338483;
     }
 
 </style>
