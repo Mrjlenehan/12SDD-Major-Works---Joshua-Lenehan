@@ -48,6 +48,11 @@ function doPost(e){
       var htmlOuptut = HtmlService.createTemplateFromFile('Physics');
       htmlOuptut.title = 'Physics:' ;
       return htmlOuptut.evaluate();
+    }if(e.parameter.Button4== 'Login'){
+      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      var htmlOuptut = HtmlService.createTemplateFromFile('Login');
+      htmlOuptut.title = 'Login:' ;
+      return htmlOuptut.evaluate();
     }else{
       //This only triggers when there is an error in loading a subject page
       var htmlOutput =  HtmlService.createTemplateFromFile('error');

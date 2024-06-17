@@ -63,7 +63,23 @@
       }
       }
 
+      function enableButtons(){
+        document.getElementById("ChoiceA").disabled = false;
+        document.getElementById("ChoiceB").disabled = false;
+        document.getElementById("ChoiceC").disabled = false;
+        document.getElementById("ChoiceD").disabled = false;
+      }
+
+      function disableButtons(){
+        document.getElementById("ChoiceA").disabled = true;
+        document.getElementById("ChoiceB").disabled = true;
+        document.getElementById("ChoiceC").disabled = true;
+        document.getElementById("ChoiceD").disabled = true;
+      }
+
       function Next(){
+        enableButtons();
+        // the buttons need to be re-enabled
         image.style.display = "none";
         image.src = ""
         // it needs to reset all images before next question
@@ -146,22 +162,26 @@
 
       // These four functions check the answer that the user has clicked through retrieving the correct answer from the sheet
       function AnsA(){
+        disableButtons()
         var userAns = "A"
         google.script.run.withSuccessHandler(CheckAnswer).retrieveAnswer(userAns,questionNum,sub)
 
       }
 
       function AnsB(){
+        disableButtons()
         var userAns = "B"
         google.script.run.withSuccessHandler(CheckAnswer).retrieveAnswer(userAns,questionNum,sub)
       }
 
       function AnsC(){
+        disableButtons()
         var userAns = "C"
         google.script.run.withSuccessHandler(CheckAnswer).retrieveAnswer(userAns,questionNum,sub)
       }
 
       function AnsD(){
+        disableButtons()
         var userAns = "D"
         google.script.run.withSuccessHandler(CheckAnswer).retrieveAnswer(userAns,questionNum,sub)
       }

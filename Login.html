@@ -5,14 +5,11 @@
     <base target="_top">
   </head>
   <body>
-    <div class="container"><h1> QuizClimber </h1>
-    <?var url = getUrl();?>
-    <!-- By using method post, this is checked repeatedly and can affect the url -->
-    <form method="post" action="<?= url ?>" > 
-      <input type="submit" class='btn' id="Pdhpe" value="PDHPE" name="Button1">
-      <input type="submit" class='btn' id="Physics" value="Physics" name="Button3">
-      <input type="submit" class='btn' id="Login" value="Login" name="Button4">
-    </form>
+    <h1> QuizClimber </h1>
+    <div>
+      <h2> Welcome to the quiz application that was made for hsc students to practice multiple choice past hsc questions</h2>
+      <h2> Please login to your google account using the button below</h2>
+    </div>
 
 
     <script>
@@ -23,17 +20,19 @@
 
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      display: flex;
+      margin: 50px;
+      padding: 0px;
+      display: inline-block;
       justify-content: center;
       align-items: center;
       height: 100vh;
       background-color: #F7F4EA;
+
     }
 
     .container {
       text-align: center;
+
     }
 
     h1 {
@@ -75,6 +74,11 @@
       font-size: 8rem;
       color: #003366; /* gold */
       margin-bottom: 50px;
+    }
+    h2{
+      padding: 50px;
+      text-align: center;
+      color: blue;
     }
 
     .btn {
