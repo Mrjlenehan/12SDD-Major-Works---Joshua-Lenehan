@@ -3,40 +3,43 @@
   <head>
     <!-- This is just a subject selection page -->
     <base target="_top">
+    <meta name="google-signin-client_id" content="926876947314-vbsmmf5l81v5oh8np43bu54vnplqpppi.apps.googleusercontent.com">
   </head>
   <body>
-    <div class="container"><h1> QuizClimber </h1>
+    <h1> QuizClimber </h1>
+    <div>
+      <h2> Welcome to the quiz application that was made for hsc students to practice multiple choice past hsc questions</h2>
+      <h2> Please create a new account using the prompts below</h2>
+    </div>
+
     <?var url = getUrl();?>
-    <!-- By using method post, this is checked repeatedly and can affect the url -->
-    <form method="post" action="<?= url ?>" > 
-      <input type="submit" class='btn' id="Pdhpe" value="PDHPE" name="Button1">
-      <input type="submit" class='btn' id="Physics" value="Physics" name="Button3">
-      <input type="submit" class='btn' id="Login" value="Login" name="Button4">
-      <input type="submit" class='btn' id="Create" value="Create" name="Button5">
-    </form>
 
     <form method="post" action="<?= url ?>" > 
-      <input type="submit" class='btn' id="Settings" value="Settings" name="Button6">
+      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
+      <input type="submit" class="btn" value="Settings"name="Button6">
     </form>
+
+
     <script>
-
 
     </script>
 
 
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      display: flex;
+      margin: 50px;
+      padding: 0px;
+      display: inline-block;
       justify-content: center;
       align-items: center;
       height: 100vh;
       background-color: #F7F4EA;
+
     }
 
     .container {
       text-align: center;
+
     }
 
     h1 {
@@ -78,6 +81,10 @@
       font-size: 8rem;
       color: #003366; /* gold */
       margin-bottom: 50px;
+    }
+    h2{
+      text-align: center;
+      color: blue;
     }
 
     .btn {

@@ -53,6 +53,16 @@ function doPost(e){
       var htmlOuptut = HtmlService.createTemplateFromFile('Login');
       htmlOuptut.title = 'Login:' ;
       return htmlOuptut.evaluate();
+    }if(e.parameter.Button5== 'Create'){
+      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      var htmlOuptut = HtmlService.createTemplateFromFile('Create');
+      htmlOuptut.title = 'Create:' ;
+      return htmlOuptut.evaluate();
+    }if(e.parameter.Button6== 'Settings'){
+      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      var htmlOuptut = HtmlService.createTemplateFromFile('Settings');
+      htmlOuptut.title = 'Settings:' ;
+      return htmlOuptut.evaluate();
     }else{
       //This only triggers when there is an error in loading a subject page
       var htmlOutput =  HtmlService.createTemplateFromFile('error');

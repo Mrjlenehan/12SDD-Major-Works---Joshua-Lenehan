@@ -3,6 +3,7 @@
   <head>
     <!-- This is just a subject selection page -->
     <base target="_top">
+
   </head>
   <body>
     <h1> QuizClimber </h1>
@@ -11,9 +12,15 @@
       <h2> Please login to your google account using the button below</h2>
     </div>
 
+    <?var url = getUrl();?>
+
+    <form method="post" action="<?= url ?>" > 
+      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
+      <input type="submit" class="btn" value="Settings"name="Button6">
+    </form>
+
 
     <script>
-
 
     </script>
 
