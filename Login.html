@@ -9,23 +9,66 @@
     <h1> QuizClimber </h1>
     <div>
       <h2> Welcome to the quiz application that was made for hsc students to practice multiple choice past hsc questions</h2>
-      <h2> Please login to your google account using the button below</h2>
     </div>
+
+
+
+  </style>
+<body>
+  <div class="container">
+
+    <!-- Login Form -->
+    <form id="login-form">
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email"><br>
+      <label for="pwd">Password:</label><br>
+      <input type="password" id="pwd" name="password"><br><br>
+      <input type="button" value="Submit" onclick="validateLogin()">
+    </form>
 
     <?var url = getUrl();?>
 
     <form method="post" action="<?= url ?>" > 
-      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
-      <input type="submit" class="btn" value="Settings"name="Button6">
+      <!-- This sets the values that the google script is looking for in post to load the settings page back up -->
+      <input id="setting" type="submit" class="btn" value="Settings"name="Button6">
     </form>
 
-
+    <!-- Scripts for handling login and loading the registration page -->
     <script>
+      var uID = "";
+      function reload(){
+        uID = document.getElementById('email').value;
+        google.script.run.setUserID(uID);
+        document.getElementById("setting").click();
+      }
+      // Function to validate login credentials
+      function validateLogin() {
+        google.script.run.withSuccessHandler(respondLogin).checkLogin(document.getElementById('email').value, document.getElementById('pwd').value);
+      }
+
+      function respondLogin(response){
+        if(response) {
+          google.script.run.withSuccessHandler(reload()).loggedIn()
+
+        } else {
+          // Shows an alert if credentials are invalid
+          window.alert('Invalid Credentials');
+          }
+        }
+
 
     </script>
-
-
+  </div>
+</body>
   <style>
+    .container{
+      background-color: violet;
+      padding: 20px;
+      align:center;
+      color: blue;
+      font-size:30px;
+      justify-content:center;
+    }
     body {
       margin: 50px;
       padding: 0px;

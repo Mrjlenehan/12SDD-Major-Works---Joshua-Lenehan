@@ -3,7 +3,6 @@
   <head>
     <!-- This is just a subject selection page -->
     <base target="_top">
-    <meta name="google-signin-client_id" content="926876947314-vbsmmf5l81v5oh8np43bu54vnplqpppi.apps.googleusercontent.com">
   </head>
   <body>
     <h1> QuizClimber </h1>
@@ -14,15 +13,62 @@
 
     <?var url = getUrl();?>
 
-    <form method="post" action="<?= url ?>" > 
+    <form name="action" method="post" action="<?= url ?>" > 
       <!-- This sets the values that the google script is looking for in post to load the main page back up -->
-      <input type="submit" class="btn" value="Settings"name="Button6">
+      <input id="setting" type="submit" class="btn" value="Settings"name="Button6">
     </form>
 
 
-    <script>
+<head>
+  <style>
 
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+
+
+
+    <!-- Registration Form -->
+    <form id="registration-form">
+      <label for="new-email">Email:</label><br>
+      <input type="email" id="new-email" name="email"><br>
+      <label for="new-pwd">Password:</label><br>
+      <input type="password" id="new-pwd" name="password"><br><br>
+      <input type="button" value="Register" onclick="registerUser()">
+    </form>
+
+
+    <!-- Scripts for handling registration and loading the login page -->
+    <script>
+      // Function to handle user registration
+      function registerUser() {
+        var email = document.getElementById('new-email').value;
+        var password = document.getElementById('new-pwd').value;
+        // Calls the server-side function to register the new user
+        google.script.run.withSuccessHandler(reload).registerNewUser(email, password);
+      }
+      function reload(){
+        document.getElementById("setting").click();
+      }
+
+      // Function to load the login page
+      function loadLogin() {
+        // Calls the server-side function to retrieve the login page content
+        google.script.run.withSuccessHandler(function(html) {
+          document.open();
+          document.write(html);
+          document.close();
+        }).getLoginPage();
+      }
+
+      
     </script>
+  </div>
+
+
 
 
   <style>
@@ -32,15 +78,19 @@
       display: inline-block;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       background-color: #F7F4EA;
-
     }
 
     .container {
       text-align: center;
-
+      background-color: white;
+      text-align: center;
+      width: 100% ;
+      font-size: 30px;
+      color: navy;
     }
+
+
 
     h1 {
       font-size: 3rem;

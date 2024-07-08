@@ -1,3 +1,6 @@
+
+var userID = "";
+
 function doGet(e) {
   // This function loads the main page on web load
   Logger.log(e)
@@ -16,6 +19,57 @@ subjects[0]  = spreadsheet.getSheetByName("PE");
 subjects[1] = spreadsheet.getSheetByName("Physics")
 
 
+function setUserID(uID){
+  userID = uID;
+  Logger.log(uID);
+}
+
+/**
+ * Checks the provided login credentials against the data in the spreadsheet.
+ *{string} email - The user's email.
+ *{string} password - The user's password.
+ * return {boolean} True if credentials match, false otherwise.
+ */
+function checkLogin(email, password) {
+  // Access the specific sheet where credentials are stored
+  const login = spreadsheet.getSheetByName('Credential');
+  // Retrieve all data from the sheet
+  const data = login.getDataRange().getValues();
+  
+  // Loop through the data to find a matching email and password
+  for(let i = 0; i < data.length; i++) {
+    if(data[i][0] == email && data[i][1] == password) {
+      return true; // Match found
+    }
+  }
+  return false; // No match found
+}
+
+
+
+/**
+ * Registers a new user by adding their credentials to the spreadsheet.
+ * Throws an error if the user already exists.
+ * @param {string} email - The new user's email.
+ * @param {string} password - The new user's password.
+ */
+function registerNewUser(email, password) {
+  // Access the specific sheet where credentials are stored
+  const login = spreadsheet.getSheetByName('Credential');
+  // Retrieve all data from the sheet
+  const data = login.getDataRange().getValues();
+
+  // Check if the email already exists in the spreadsheet
+  for(let i = 0; i < data.length; i++) {
+    if(data[i][0] == email) {
+      throw new Error('User already exists');
+    }
+  }
+  // Append the new user's email and password to the spreadsheet
+  login.appendRow([email, password]);
+}
+
+
 function retrieveLength(sub){
   // The function retrieves how many rows there are in the spreadsheet
   // .getNumRows looks for the number of filled rows in a range which since empty is the entire spreadsheet
@@ -27,7 +81,9 @@ function  getUrl () {
  var url = ScriptApp.getService().getUrl();
  return url;
 }
-
+function loggedIn (){
+  Logger.log("Logged In")
+}
 
 
 function doPost(e){
