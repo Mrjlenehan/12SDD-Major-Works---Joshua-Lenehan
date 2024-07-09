@@ -5,7 +5,7 @@
   </head>
   <body onload="Next()">
       <!-- The onload function is a primary read to load up the first question without requiring to press the button -->
-    <div><h1> Physics HSC Past Paper Multiple Choice </h1><h2 id="QYear">Year</h2>
+    <div><h1> Physics HSC Past Paper Multiple Choice </h1><h2 id="QYear">Year</h2> <h2 id="physicsScore">Score </h2>
     <h3 id = "QName"> Question 1 </h3>
     <div id="QOne">Answer A</div>
     <div id="QTwo">Answer B</div>
@@ -44,6 +44,7 @@
       var unique = []
       // sub is = 1 as physics is the 1st subject
       var sub = 1
+      var physicsScore = 0
       // This set of click listeners is checking for the users answer
       document.getElementById("ChoiceA").addEventListener("click",AnsA)
       document.getElementById("ChoiceB").addEventListener("click",AnsB)
@@ -94,6 +95,7 @@
         // This block of questions runs the functions to retrieve the information for the question and then pass it to a function that replaces each element
           google.script.run.withSuccessHandler(replaceQuestion).retrieveQuestions(questionNum, sub);
           google.script.run.withSuccessHandler(replaceYear).retrieveYear(questionNum, sub);
+          replaceScore()
           google.script.run.withSuccessHandler(replaceImage).retrieveImage(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerOne).retrieveAnswerOne(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerTwo).retrieveAnswerTwo(questionNum, sub);
@@ -137,6 +139,10 @@
       function replaceYear(Year){
         document.getElementById("QYear").textContent = "Year " + Year
         // replaces year element with the returned year
+      }
+
+      function replaceScore(){
+        document.getElementById("physicsScore").textContent = "Your score for Physics this session is " + physicsScore
       }
 
 
@@ -192,9 +198,11 @@
         if(Checked[0] == "correct"){
           // changes the colour of the elements text to match correctness
           document.getElementById("correct").style.color = 'green';
+          physicsScore = physicsScore + 1;
         }
         else{
-          document.getElementById("correct").style.color = 'red'
+          document.getElementById("correct").style.color = 'red';
+          physicsScore = physicsScore - 1;
         }
         // Actual replacement of empty element into the answer and the users choice
         document.getElementById("correct").textContent ="You chose " + Checked[2] + " Which is " + Checked[0] + " because the correct answer was " + Checked[1];
