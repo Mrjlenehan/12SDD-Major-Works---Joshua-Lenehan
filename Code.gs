@@ -1,13 +1,17 @@
 
 var userID = "";
 
+
 function doGet(e) {
   // This function loads the main page on web load
   Logger.log(e)
   var htmlOuptut = HtmlService.createTemplateFromFile('Title');
   htmlOuptut.title = 'Home Page';
+  var cache = CacheService.getScriptCache();
+  cache.removeAll(['Score'])
+  cache.put('Score' , 0)
+  Logger.log("It works")
   return htmlOuptut.evaluate();
-
 }
 
 // This is the information about the spreadsheet that is used to import the information into the program
@@ -83,6 +87,22 @@ function  getUrl () {
 }
 function loggedIn (){
   Logger.log("Logged In")
+}
+
+function updateSession(subScore){
+  var cache = CacheService.getScriptCache();
+  var sessionScore = cache.get('Score');
+  sessionScore = parseInt(sessionScore) + subScore;
+  var sessionString = sessionScore.toString();
+  cache.put('Score' , sessionString);
+  Logger.log(sessionScore)
+}
+
+function displayScore(){
+  var cache = CacheService.getScriptCache();
+  var showScore = cache.get('Score');
+  Logger.log(showScore)
+  return showScore
 }
 
 

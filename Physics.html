@@ -22,7 +22,7 @@
     <button id="SButton" class="btn">Next Question</button>
         <!-- The url is stored as a variable -->
     <?var url = getUrl();?>
-    <form method="post" action="<?= url ?>" > 
+    <form method="post" action="<?= url ?>" onsubmit="updateScore()" > 
     <!-- The post action is able to affect the url after the first load and is repeating constantly -->
     <input type="submit" class="btn" value="Back To Home Screen"name="Button2">
     <!-- This sets the values that the google script is looking for in post to load the main page back up -->
@@ -95,7 +95,6 @@
         // This block of questions runs the functions to retrieve the information for the question and then pass it to a function that replaces each element
           google.script.run.withSuccessHandler(replaceQuestion).retrieveQuestions(questionNum, sub);
           google.script.run.withSuccessHandler(replaceYear).retrieveYear(questionNum, sub);
-          replaceScore()
           google.script.run.withSuccessHandler(replaceImage).retrieveImage(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerOne).retrieveAnswerOne(questionNum, sub);
           google.script.run.withSuccessHandler(replaceAnswerTwo).retrieveAnswerTwo(questionNum, sub);
@@ -199,13 +198,20 @@
           // changes the colour of the elements text to match correctness
           document.getElementById("correct").style.color = 'green';
           physicsScore = physicsScore + 1;
+          replaceScore()
         }
         else{
           document.getElementById("correct").style.color = 'red';
           physicsScore = physicsScore - 1;
+          replaceScore()
         }
         // Actual replacement of empty element into the answer and the users choice
         document.getElementById("correct").textContent ="You chose " + Checked[2] + " Which is " + Checked[0] + " because the correct answer was " + Checked[1];
+      }
+
+      function updateScore(){
+        subScore = physicsScore
+        google.script.run.updateSession(subScore);
       }
 
     </script>

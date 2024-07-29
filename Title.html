@@ -4,7 +4,7 @@
     <!-- This is just a subject selection page -->
     <base target="_top">
   </head>
-  <body>
+  <body onload="retrieveScore()">
     <div class="container"><h1> QuizClimber </h1>
     <?var url = getUrl();?>
     <!-- By using method post, this is checked repeatedly and can affect the url -->
@@ -18,7 +18,19 @@
     <form method="post" action="<?= url ?>" > 
       <input type="submit" class='btn' id="Settings" value="Settings" name="Button6">
     </form>
+    <input type="button" onclick="saveScore()">
+    <h2 id="SessionScore" class="SessionScore"> Session Score</h2>
+    <input type="button" onclick="retrieveScore()">
+
     <script>
+      function retrieveScore(){
+        google.script.run.withSuccessHandler(reloadSession).displayScore();
+      }
+
+      function reloadSession(showScore){
+        document.getElementById("SessionScore").textContent = "Your total score this session is " + showScore;
+      }
+
 
 
     </script>
@@ -80,8 +92,13 @@
       margin-bottom: 50px;
     }
 
+    #SessionScore{
+      color: #003366;
+      font-size: 50px;
+    }
+
     .btn {
-      padding: 20px 40px;
+      padding: 20px 20px;
       font: calibri;
       font-size: 4rem;
       border: 2px solid #DED9E2; /* dark blue */
