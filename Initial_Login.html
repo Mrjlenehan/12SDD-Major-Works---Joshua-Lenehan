@@ -27,10 +27,9 @@
     </form>
 
     <?var url = getUrl();?>
-
-    <form method="post" action="<?= url ?>" > 
-      <!-- This sets the values that the google script is looking for in post to load the settings page back up -->
-      <input id="setting" type="submit" class="btn" value="Settings"name="Button6">
+    <form name="action" method="post" action="<?= url ?>" style="display: none;"> 
+      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
+      <input id="setting" type="submit" class="btn" value="Back To Home Screen"name="Button2">
     </form>
 
     <!-- Scripts for handling login and loading the registration page -->

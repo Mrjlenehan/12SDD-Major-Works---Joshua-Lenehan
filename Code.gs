@@ -1,16 +1,15 @@
 
-var userID = "";
 
 
 function doGet(e) {
   // This function loads the main page on web load
   Logger.log(e)
-  var htmlOuptut = HtmlService.createTemplateFromFile('Title');
-  htmlOuptut.title = 'Home Page';
+  var htmlOuptut = HtmlService.createTemplateFromFile('Account');
+  htmlOuptut.title = 'Account';
   var cache = CacheService.getScriptCache();
-  cache.removeAll(['Score'])
+  cache.removeAll(['Score' , 'UID'])
   cache.put('Score' , 0)
-  Logger.log("It works")
+  cache.put('UID', '')
   return htmlOuptut.evaluate();
 }
 
@@ -21,11 +20,44 @@ var subjects = []
 // Each subject has its own page in the spreadsheet that is stored in the array title subjects
 subjects[0]  = spreadsheet.getSheetByName("PE");
 subjects[1] = spreadsheet.getSheetByName("Physics")
+var creds = spreadsheet.getSheetByName("Credential")
 
 
-function setUserID(uID){
-  userID = uID;
-  Logger.log(uID);
+function setUserID(email){
+  var length = creds.getDataRange().getNumRows();
+  var cache = CacheService.getScriptCache();
+  const data = creds.getRange(1, 1, length).getValues();
+  for (var counter = 1; counter < length; counter = counter + 1) {
+    Logger.log(data[counter])
+    if (data[1, counter] == email){
+      cache.put('UID', counter);
+      var row = counter;
+    }
+  }
+  return row;
+}
+
+function saveScore(){
+  var cache = CacheService.getScriptCache();
+  var uID = cache.get('UID');
+  var row = parseInt(uID);
+  Logger.log(row)
+  var currentScore = creds.getRange(row+1, 3, 1).getValue();
+  var sessionScore = cache.get('Score');
+  Logger.log(currentScore)
+  var intSessionScore = parseInt(sessionScore);
+  Logger.log(intSessionScore)
+  var newScore = currentScore + intSessionScore;
+  Logger.log(newScore)
+  creds.getRange(row+1, '3').setValue(newScore)
+  // var cell = creds.getRange(row, 3)
+  // cell.setValue(newScore)
+  cache.put('Score', '0')
+  return true
+}
+
+function initialiseScore(uID){
+  creds.getRange(uID+1, '3').setValue(0)
 }
 
 /**
@@ -71,6 +103,7 @@ function registerNewUser(email, password) {
   }
   // Append the new user's email and password to the spreadsheet
   login.appendRow([email, password]);
+  return(email)
 }
 
 
@@ -105,7 +138,12 @@ function displayScore(){
   return showScore
 }
 
-
+// Button1 is for PDHPE
+// Button2 is for Home screen
+// Button3 is for Physics
+// Button4 is for Login
+// Button5 is for Creating an account
+// Button6 is for Setting
 function doPost(e){
   // This function loads the pages of the app, doPost is used since it can be updated constantly not just on load
    Logger.log(JSON.stringify(e))
@@ -139,7 +177,17 @@ function doPost(e){
       var htmlOuptut = HtmlService.createTemplateFromFile('Settings');
       htmlOuptut.title = 'Settings:' ;
       return htmlOuptut.evaluate();
-    }else{
+    }if(e.parameter.Button7== 'Initial_Create'){
+      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      var htmlOuptut = HtmlService.createTemplateFromFile('Initial_Create');
+      htmlOuptut.title = 'Create:' ;
+      return htmlOuptut.evaluate();
+      }if(e.parameter.Button8== 'Initial_Login'){
+      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      var htmlOuptut = HtmlService.createTemplateFromFile('Initial_Login');
+      htmlOuptut.title = 'Login:' ;
+      return htmlOuptut.evaluate();
+      }else{
       //This only triggers when there is an error in loading a subject page
       var htmlOutput =  HtmlService.createTemplateFromFile('error');
       htmlOutput.title = 'error:'; 
