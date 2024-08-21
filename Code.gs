@@ -37,27 +37,42 @@ function setUserID(email){
   return row;
 }
 
-function saveScore(){
-  var cache = CacheService.getScriptCache();
-  var uID = cache.get('UID');
-  var row = parseInt(uID);
-  Logger.log(row)
-  var currentScore = creds.getRange(row+1, 3, 1).getValue();
-  var sessionScore = cache.get('Score');
-  Logger.log(currentScore)
-  var intSessionScore = parseInt(sessionScore);
-  Logger.log(intSessionScore)
-  var newScore = currentScore + intSessionScore;
-  Logger.log(newScore)
-  creds.getRange(row+1, '3').setValue(newScore)
-  // var cell = creds.getRange(row, 3)
-  // cell.setValue(newScore)
+
+
+function updatePhysics(subScore){
+var cache = CacheService.getScriptCache();
+var uID = cache.get('UID');
+var intUID = parseInt(uID) + 1;
+var oldScore = creds.getRange(intUID, '5').getValue();
+var newScore = (oldScore) + subScore;
+creds.getRange(intUID, '5', '1').setValue(newScore)
+var currentScore = creds.getRange(intUID, 3, 1).getValue();
+var sessionScore = cache.get('Score');
+var intSessionScore = parseInt(sessionScore);
+var updatedScore = currentScore + intSessionScore;
+  creds.getRange(intUID, '3').setValue(updatedScore)
   cache.put('Score', '0')
-  return true
+}
+
+function updatePe(subScore){
+var cache = CacheService.getScriptCache();
+var uID = cache.get('UID');
+var intUID = parseInt(uID) + 1;
+var oldScore = creds.getRange(intUID, 4).getValue();
+var newScore = (oldScore) + subScore;
+creds.getRange(intUID, 4).setValue(newScore)
+var currentScore = creds.getRange(intUID, 3, 1).getValue();
+var sessionScore = cache.get('Score');
+var intSessionScore = parseInt(sessionScore);
+var updatedScore = currentScore + intSessionScore;
+  creds.getRange(intUID, '3').setValue(updatedScore)
+  cache.put('Score', '0')
 }
 
 function initialiseScore(uID){
   creds.getRange(uID+1, '3').setValue(0)
+  creds.getRange(uID+1, '5').setValue(0)
+  creds.getRange(uID+1, '4').setValue(0)
 }
 
 /**
@@ -182,12 +197,17 @@ function doPost(e){
       var htmlOuptut = HtmlService.createTemplateFromFile('Initial_Create');
       htmlOuptut.title = 'Create:' ;
       return htmlOuptut.evaluate();
-      }if(e.parameter.Button8== 'Initial_Login'){
+    }if(e.parameter.Button8== 'Initial_Login'){
       // the if statement checks in the URL for the parameter of button3 and if it matches Physics
       var htmlOuptut = HtmlService.createTemplateFromFile('Initial_Login');
       htmlOuptut.title = 'Login:' ;
       return htmlOuptut.evaluate();
-      }else{
+    }if(e.parameter.Button9== 'Score'){
+      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      var htmlOuptut = HtmlService.createTemplateFromFile('Score');
+      htmlOuptut.title = 'Score:' ;
+      return htmlOuptut.evaluate();
+    }else{
       //This only triggers when there is an error in loading a subject page
       var htmlOutput =  HtmlService.createTemplateFromFile('error');
       htmlOutput.title = 'error:'; 
@@ -197,6 +217,29 @@ function doPost(e){
 
 
 
+function retrieveOverall(){
+  var cache = CacheService.getScriptCache();
+  var uID = cache.get('UID');
+  var row = parseInt(uID);
+  var totalScore = creds.getRange(row+1, 3, 1).getValue();
+  return totalScore
+}
+
+function retrievePhysics(){
+  var cache = CacheService.getScriptCache();
+  var uID = cache.get('UID');
+  var row = parseInt(uID);
+  var physicsScore = creds.getRange(row+1, 5, 1).getValue();
+  return physicsScore
+}
+
+function retrievePdhpe(){
+  var cache = CacheService.getScriptCache();
+  var uID = cache.get('UID');
+  var row = parseInt(uID);
+  var peScore = creds.getRange(row+1, 4, 1).getValue();
+  return peScore
+}
 
 function retrieveQuestions(questionNum, sub){
   // This function is used to load the question as a string in the variable question

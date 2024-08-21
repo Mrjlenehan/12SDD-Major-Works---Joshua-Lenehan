@@ -211,6 +211,7 @@
 
       function updateScore(){
         subScore = pdhpeScore;
+        google.script.run.updatePe(subScore);
         google.script.run.updateSession(subScore);
       }
 

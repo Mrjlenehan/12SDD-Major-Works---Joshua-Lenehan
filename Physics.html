@@ -210,7 +210,8 @@
       }
 
       function updateScore(){
-        subScore = physicsScore
+        subScore = physicsScore;
+        google.script.run.updatePhysics(subScore);
         google.script.run.updateSession(subScore);
       }
 
