@@ -216,23 +216,24 @@
 
     </script>
 
-    <style>
-body {
+<style>
+    body {
     font-family: Arial, sans-serif;
-    background-color: #F7F4EA; /* Black */
-    color: #003366; /* Yellow */
+    background-color: #F7F4EA;
+    color: #003366;
     margin: 0;
     padding: 0;
-    position: relative; /* Set body position to relative */
+    position: relative;
 }
 
 h1, h2 {
-    color: #003366; /* Yellow */
-    font-size:50px;
+    color: #003366;
+    font-size: 50px;
 }
-h3{
-  color: #003366; /* Yellow */
-  font-size:30px;
+
+h3 {
+    color: #003366;
+    font-size: 30px;
 }
 
 div {
@@ -241,74 +242,92 @@ div {
 
 #QOne, #QTwo, #QThree, #QFour {
     margin-left: 20px;
-  font-size:25px
+    font-size: 25px;
 }
 
 input[type="button"] {
-    background-color: #7768B6; /* Blue */
+    background-color: #7768B6;
     border: none;
     color: #75C9C8;
-    padding: 20px 40px; /* Larger padding */
+    padding: 20px 40px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 24px; /* Larger font size */
-    margin: 10px; /* Add margin between buttons */
+    font-size: 24px;
+    margin: 10px;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 #SButton {
-    background-color: #7768B6; /* Blue */
+    background-color: #7768B6;
     color: #75C9C8;
-    padding: 30px 60px; /* Larger padding */
-    font-size: 28px; /* Larger font size */
-    margin: 20px 0; /* Add margin between button and options */
+    padding: 30px 60px;
+    font-size: 28px;
+    margin: 20px 0;
 }
-#SButton:hover {
-  background-color: #C0B9DD; /* navy */
-  color: #338483;
+
+#SButton:hover, input[type="button"]:hover {
+    background-color: #C0B9DD;
+    color: #338483;
 }
 
 input[type="submit"] {
-    background-color: #7768B6; /* Blue */
+    background-color: #7768B6;
     color: #75C9C8;
-    padding: 15px 30px; /* Larger padding */
+    padding: 15px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 20px; /* Larger font size */
-    margin: 10px; /* Add margin between buttons */
+    font-size: 20px;
+    margin: 10px;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 #correct {
     font-weight: bold;
     color: green;
-    font-size:40px;
+    font-size: 40px;
 }
 
-/* Position the "Back To Home Screen" button */
 form {
     position: absolute;
-    top: 10px; /* Adjust top position */
-    right: 20px; /* Adjust right position */
+    top: 10px;
+    right: 20px;
 }
 
 #Choices {
     display: grid;
-    grid-template-columns: repeat(2, auto); /* Two columns */
-    justify-content: center; /* Center the grid */
-    grid-gap: 20px; /* Add gap between buttons */
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    grid-gap: 20px;
 }
-.btn:hover {
-  background-color: #C0B9DD; /* white */
-  color: #338483;
-    }
 
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #C0B9DD;
+    margin-bottom: 30px;
+}
+
+.question-container {
+    padding: 20px;
+    background-color: #E3E1E8;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.answer {
+    background-color: #F7F4EA;
+    border: 1px solid #7768B6;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
 </style>
-
 
   </body>
 </html>
