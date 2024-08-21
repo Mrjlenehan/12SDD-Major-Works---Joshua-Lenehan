@@ -58,27 +58,55 @@
   }
 
   .btn {
-    padding: 15px 25px;
-    font-size: 1.5rem;
     font-weight: bold;
     border: none;
-    background-color: #C0B9DD;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-radius: 8px;
-    margin: 20px;
-    transition: transform 0.2s, background-color 0.3s, color 0.3s;
     cursor: pointer;
+    padding: 20px 35px; /* Increased padding for larger buttons */
+    font-size: 1.75rem; /* Slightly larger font size */
+    margin: 20px 0; /* Adjusted margin for better spacing */
+    width: 100%; /* Make buttons fill the width of the container */
+    max-width: 400px; /* Limit the maximum width of the buttons */
+    display: block; /* Ensure each button is on a new line */
+    margin-left: auto; /* Center align the buttons */
+    margin-right: auto; /* Center align the buttons */
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
   }
 
   .btn:hover {
-    background-color: #7768B6;
-    color: #E0F7FA;
-    transform: scale(1.05);
+    transform: scale(1.05); /* Enlarge slightly on hover */
   }
 
-  
+
+  /* PDHPE Button */
+  #Pdhpe {
+    background-color: #FF8C42; /* Orange color */
+  }
+
+  #Pdhpe:hover {
+    background-color: #D8763A; /* Darker orange on hover */
+  }
+
+  /* Physics Button */
+  #Physics {
+    background-color: #4CAF50; /* Green color */
+  }
+
+  #Physics:hover {
+    background-color: #388E3C; /* Darker green on hover */
+  }
+
+  /* Default color for other buttons */
+  #Settings, #Score {
+    background-color: #C0B9DD; /* Original color retained */
+  }
+
+  #Settings:hover, #Score:hover {
+    background-color: #7768B6; /* Original hover color retained */
+  }
 
   input[type="button"] {
     padding: 10px 20px;
@@ -98,6 +126,7 @@
     transform: scale(1.05);
   }
 </style>
+
 
 
 </html>

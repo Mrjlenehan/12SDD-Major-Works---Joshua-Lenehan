@@ -7,6 +7,7 @@
   </head>
   <body onload="loadOverall()">
     <h1> QuizClimber </h1>
+
     <div>
       <h2> Below are your current total scores </h2>
     </div>
@@ -56,86 +57,67 @@
     </script>
 
 
-  <style>
-    body {
-      margin: 50px;
-      padding: 0px;
-      display: inline-block;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #F7F4EA;
+  
 
-    }
-
-    .container {
-      text-align: center;
-
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      font-size: 1.5rem;
-      border: 2px solid #4CAF50;
-      background-color: #4CAF50;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #45a049;
-    }
-  </style>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       background-color: #F7F4EA;
-      color: #fff;
+      display: grid;
+      place-items: center;
+      height: 100vh;
     }
 
     .container {
       text-align: center;
-      margin-top: 100px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 800px;
     }
 
     h1 {
-      font-size: 8rem;
-      color: #003366; /* gold */
-      margin-bottom: 50px;
+      font-size: 3rem;
+      color: #003366;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
-    h2{
-      padding: 50px;=
-      text-align: center;
-      color: blue;
+
+    h2 {
+      font-size: 1.5rem;
+      color: #003366;
+      margin: 15px 0; /* Adjust spacing to ensure proper vertical alignment */
+      display: block; /* Ensure headings stack vertically */
+    }
+
+    .scores {
+      margin-bottom: 30px; /* Space between scores and button */
     }
 
     .btn {
-      padding: 20px 40px;
-      font: calibri;
-      font-size: 4rem;
-      border: 2px solid #DED9E2; /* dark blue */
-      background-color: #C0B9DD; /* dark blue */
-      color: #338483; /* gold */
+      padding: 15px 30px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border: 2px solid #7768B6;
+      background-color: #C0B9DD;
+      color: #003366;
       text-decoration: none;
       border-radius: 5px;
-      transition: background-color 0.3s, color 0.3s;
-      margin-bottom:200px;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+      margin: 20px 0; /* Margin to separate button from other elements */
+      display: inline-block; /* Ensure button is centered and sized properly */
     }
 
     .btn:hover {
-      background-color: #7768B6; /* navy */
-      color: #75C9C8;
+      background-color: #7768B6;
+      transform: scale(1.05); /* Enlarges button on hover */
     }
   </style>
+
 
 </html>
