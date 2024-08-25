@@ -34,7 +34,11 @@
     <img id="img" src="" >
     <img id="img2" src="" >
 
+    <div id="help">
+      <h3 onclick="helpAlert()" > Click if stuck </h3>
+    </div>
 
+    <h3 id="support"> </h3>
 
 
     <script>
@@ -215,6 +219,22 @@
         google.script.run.updateSession(subScore);
       }
 
+      function helpAlert(){
+        alert("Helpful information")
+        confirmHelp()
+      }
+
+      function confirmHelp() {
+        var clicked;
+        if (confirm("Do you need further information") == true) {
+            clicked = " Here is some contact information for further requests, also use for errors, Email = mrjlenehan101@gmail.com, Mobile = 0409260964";
+        } else {
+            clicked = "";
+        }
+        document.getElementById("support").innerHTML = clicked;
+      }
+
+
     </script>
 
     <style>
@@ -309,6 +329,16 @@ form {
     background-color: #C0B9DD; /* Light purple */
     color: #338483; /* Dark teal text */
 }
+
+  #help{
+    text-decoration: none;
+    color: #003366;
+  }
+
+  #help :hover{
+    text-decoration: underline;
+    color: #CC5500;
+  }
 
 </style>
 

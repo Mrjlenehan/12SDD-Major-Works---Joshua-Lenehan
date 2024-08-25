@@ -26,10 +26,23 @@
     </form>
 
     <?var url = getUrl();?>
+
     <form name="action" method="post" action="<?= url ?>" style="display: none;"> 
       <!-- This sets the values that the google script is looking for in post to load the main page back up -->
-      <input id="setting" type="submit" class="btn" value="Back To Home Screen"name="Button2">
+      <input id="setting" type="submit" class="btn" value="Account"name="Button10">
     </form>
+
+
+    <form name="action" method="post" action="<?= url ?>" > 
+      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
+      <input id="setting" type="submit" class="btn" value="Account"name="Button10">
+    </form>
+
+    <div id="help">
+      <h3 onclick="helpAlert()" > Click if stuck </h3>
+    </div>
+
+    <h3 id="support"> </h3>
 
     <!-- Scripts for handling login and loading the registration page -->
     <script>
@@ -52,6 +65,22 @@
           window.alert('Invalid Credentials');
           }
         }
+
+      function helpAlert(){
+        alert("Helpful information")
+        confirmHelp()
+      }
+
+      function confirmHelp() {
+        var clicked;
+        if (confirm("Do you need further information") == true) {
+            clicked = " Here is some contact information for further requests, also use for errors, Email = mrjlenehan101@gmail.com, Mobile = 0409260964";
+        } else {
+            clicked = "";
+        }
+        document.getElementById("support").innerHTML = clicked;
+      }
+
 
 
     </script>
@@ -146,6 +175,17 @@
   .container form {
     margin-bottom: 20px;
   }
+
+  #help{
+    text-decoration: none;
+    color: #003366;
+  }
+
+  #help :hover{
+    text-decoration: underline;
+    color: #CC5500;
+  }
+  
 </style>
 
 

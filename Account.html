@@ -8,7 +8,7 @@
   <body>
     <h1> QuizClimber </h1>
     <div>
-      <h2> Welcome to the Settings Page</h2>
+      <h2> Welcome to this education assistance application, <br> Please create an account or sign in</h2>
     </div>
     <?var url = getUrl();?>
     <!-- By using method post, this is checked repeatedly and can affect the url -->
@@ -17,8 +17,30 @@
       <button type="submit" class='btn' id="Login" value="Initial_Login" name="Button8">Login</button>
     </form>
 
+        <div id="help">
+      <h3 onclick="helpAlert()" > Click if stuck </h3>
+    </div>
+
+    <h3 id="support"> </h3>
+
 
     <script>
+
+      function helpAlert(){
+        alert("Helpful information")
+        confirmHelp()
+      }
+
+      function confirmHelp() {
+        var clicked;
+        if (confirm("Do you need further information") == true) {
+            clicked = " Here is some contact information for further requests, also use for errors, Email = mrjlenehan101@gmail.com, Mobile = 0409260964";
+        } else {
+            clicked = "";
+        }
+        document.getElementById("support").innerHTML = clicked;
+      }
+
 
     </script>
 
@@ -73,6 +95,16 @@ form {
   background-color: #C0B9DD; /* Lighter blue on hover */
   color: #338483; /* Teal text on hover */
 }
+
+  #help{
+    text-decoration: none;
+    color: #003366;
+  }
+
+  #help :hover{
+    text-decoration: underline;
+    color: #CC5500;
+  }
 
   </style>
 

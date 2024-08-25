@@ -47,9 +47,9 @@ var oldScore = creds.getRange(intUID, '5').getValue();
 var newScore = (oldScore) + subScore;
 creds.getRange(intUID, '5', '1').setValue(newScore)
 var currentScore = creds.getRange(intUID, 3, 1).getValue();
-var sessionScore = cache.get('Score');
-var intSessionScore = parseInt(sessionScore);
-var updatedScore = currentScore + intSessionScore;
+// var sessionScore = cache.get('Score');
+// var intSessionScore = parseInt(sessionScore);
+var updatedScore = currentScore + subScore;
   creds.getRange(intUID, '3').setValue(updatedScore)
   cache.put('Score', '0')
 }
@@ -61,6 +61,21 @@ var intUID = parseInt(uID) + 1;
 var oldScore = creds.getRange(intUID, 4).getValue();
 var newScore = (oldScore) + subScore;
 creds.getRange(intUID, 4).setValue(newScore)
+var currentScore = creds.getRange(intUID, 3, 1).getValue();
+// var sessionScore = cache.get('Score');
+// var intSessionScore = parseInt(sessionScore);
+var updatedScore = currentScore + subScore;
+  creds.getRange(intUID, '3').setValue(updatedScore)
+  cache.put('Score', '0')
+}
+
+function updateTotal(subScore){
+var cache = CacheService.getScriptCache();
+var uID = cache.get('UID');
+var intUID = parseInt(uID) + 1;
+var oldScore = creds.getRange(intUID, 3).getValue();
+var newScore = (oldScore) + subScore;
+creds.getRange(intUID, 3).setValue(newScore)
 var currentScore = creds.getRange(intUID, 3, 1).getValue();
 var sessionScore = cache.get('Score');
 var intSessionScore = parseInt(sessionScore);
@@ -120,6 +135,19 @@ function registerNewUser(email, password) {
   login.appendRow([email, password]);
   return(email)
 }
+
+// function checkUser(email, password){
+//  const login = spreadsheet.getSheetByName('Credential');
+//  const data = login.getDataRange().getValues();
+//  var isNew = true
+
+//   for(let i = 0; i < data.length; i++) {
+//     if(data[i][0] == email) {
+//       var isNew = false
+//     }
+//   }
+//   return isNew
+// }
 
 
 function retrieveLength(sub){
@@ -206,6 +234,11 @@ function doPost(e){
       // the if statement checks in the URL for the parameter of button3 and if it matches Physics
       var htmlOuptut = HtmlService.createTemplateFromFile('Score');
       htmlOuptut.title = 'Score:' ;
+      return htmlOuptut.evaluate();
+    }if(e.parameter.Button10== 'Account'){
+      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      var htmlOuptut = HtmlService.createTemplateFromFile('Account');
+      htmlOuptut.title = 'Account:' ;
       return htmlOuptut.evaluate();
     }else{
       //This only triggers when there is an error in loading a subject page

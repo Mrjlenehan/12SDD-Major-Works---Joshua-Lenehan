@@ -18,7 +18,28 @@
       <input type="submit" class='btn' id="Score" value="Score" name="Button9">
     </form>
 
+    <div id="help">
+      <h3 onclick="helpAlert()" > Click if stuck </h3>
+    </div>
+
+    <h3 id="support"> </h3>
+
     <script>
+
+      function helpAlert(){
+        alert("Helpful information")
+        confirmHelp()
+      }
+
+      function confirmHelp() {
+        var clicked;
+        if (confirm("Do you need further information") == true) {
+            clicked = " Here is some contact information for further requests, also use for errors, Email = mrjlenehan101@gmail.com, Mobile = 0409260964";
+        } else {
+            clicked = "";
+        }
+        document.getElementById("support").innerHTML = clicked;
+      }
 
     </script>
 
@@ -125,6 +146,17 @@
     background-color: #2e0001;
     transform: scale(1.05);
   }
+
+  #help{
+    text-decoration: none;
+    color: #003366;
+  }
+
+  #help :hover{
+    text-decoration: underline;
+    color: #CC5500;
+  }
+
 </style>
 
 

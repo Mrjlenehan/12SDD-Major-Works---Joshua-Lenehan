@@ -20,16 +20,13 @@
       <input id="setting" type="submit" class="btn" value="Back To Home Screen"name="Button2">
     </form>
 
-<head>
-  <style>
 
-
-
-  </style>
-</head>
-<body>
   <div class="container">
 
+    <form name="action" method="post" action="<?= url ?>" > 
+      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
+      <input id="load" type="submit" class="btn" value="Account"name="Button10">
+    </form>
 
 
     <!-- Registration Form -->
@@ -38,19 +35,40 @@
       <input type="email" id="new-email" name="email"><br>
       <label for="new-pwd">Password:</label><br>
       <input type="password" id="new-pwd" name="password"><br><br>
-      <input type="button" value="Register" onclick="registerUser()">
+      <input type="button" value="Register" onclick="registerValidUser()">
     </form>
 
+
+
+    <div id="help">
+      <h3 onclick="helpAlert()" > Click if stuck </h3>
+    </div>
+
+    <h3 id="support"> </h3>
+  </body>
 
     <!-- Scripts for handling registration and loading the login page -->
     <script>
       // Function to handle user registration
-      function registerUser() {
+      // function registerUser() {
+      //   var email = document.getElementById('new-email').value;
+      //   var password = document.getElementById('new-pwd').value;
+      //   google.script.run.withSuccessHandler(registerValidUser).checkUser(email, password)
+      // }
+
+      function registerValidUser() {
         var email = document.getElementById('new-email').value;
         var password = document.getElementById('new-pwd').value;
         // Calls the server-side function to register the new user
-        google.script.run.withSuccessHandler(setUserID).registerNewUser(email, password);
-      }
+          if (email != "" && password != ""){
+            google.script.run.withSuccessHandler(setUserID).registerNewUser(email, password);
+          }
+          else{
+            alert("Please enter a valid email and/or password ");
+          }
+        }
+        
+
 
       function setUserID(email){
         google.script.run.withSuccessHandler(initialiseScore).setUserID(email);
@@ -72,6 +90,21 @@
           document.write(html);
           document.close();
         }).getLoginPage();
+      }
+
+      function helpAlert(){
+        alert("Helpful information")
+        confirmHelp()
+      }
+
+      function confirmHelp() {
+        var clicked;
+        if (confirm("Do you need further information") == true) {
+            clicked = " Here is some contact information for further requests, also use for errors, Email = mrjlenehan101@gmail.com, Mobile = 0409260964";
+        } else {
+            clicked = "";
+        }
+        document.getElementById("support").innerHTML = clicked;
       }
 
       
@@ -163,6 +196,17 @@
     color: #E0F7FA;
     transform: scale(1.05);
   }
+
+  #help{
+    text-decoration: none;
+    color: #003366;
+  }
+
+  #help :hover{
+    text-decoration: underline;
+    color: #CC5500;
+  }
+
 </style>
 
 </html>
