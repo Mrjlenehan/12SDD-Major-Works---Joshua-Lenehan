@@ -1,6 +1,3 @@
-
-
-
 function doGet(e) {
   // This function loads the main page on web load
   Logger.log(e)
@@ -24,6 +21,7 @@ var creds = spreadsheet.getSheetByName("Credential")
 
 
 function setUserID(email){
+  // This sets up a cache to store which row in the spreadsheet the user is in
   var length = creds.getDataRange().getNumRows();
   var cache = CacheService.getScriptCache();
   const data = creds.getRange(1, 1, length).getValues();
@@ -40,6 +38,7 @@ function setUserID(email){
 
 
 function updatePhysics(subScore){
+  // This stores the users physics score overall in the spreadsheet
 var cache = CacheService.getScriptCache();
 var uID = cache.get('UID');
 var intUID = parseInt(uID) + 1;
@@ -55,6 +54,7 @@ var updatedScore = currentScore + subScore;
 }
 
 function updatePe(subScore){
+  // This stores the pe scores overall in the spreadsheet
 var cache = CacheService.getScriptCache();
 var uID = cache.get('UID');
 var intUID = parseInt(uID) + 1;
@@ -70,6 +70,7 @@ var updatedScore = currentScore + subScore;
 }
 
 function updateTotal(subScore){
+  // this stores the total score in the spreadsheet
 var cache = CacheService.getScriptCache();
 var uID = cache.get('UID');
 var intUID = parseInt(uID) + 1;
@@ -85,6 +86,7 @@ var updatedScore = currentScore + intSessionScore;
 }
 
 function initialiseScore(uID){
+  // Stores 0 in the score columns when creating an account
   creds.getRange(uID+1, '3').setValue(0)
   creds.getRange(uID+1, '5').setValue(0)
   creds.getRange(uID+1, '4').setValue(0)
@@ -166,6 +168,7 @@ function loggedIn (){
 }
 
 function updateSession(subScore){
+  // This stores the score for the session in the cache so it can be repeatedly accessed
   var cache = CacheService.getScriptCache();
   var sessionScore = cache.get('Score');
   sessionScore = parseInt(sessionScore) + subScore;
@@ -175,6 +178,7 @@ function updateSession(subScore){
 }
 
 function displayScore(){
+  // The displays the score stored in cache
   var cache = CacheService.getScriptCache();
   var showScore = cache.get('Score');
   Logger.log(showScore)
@@ -196,7 +200,7 @@ function doPost(e){
       htmlOutput.title = 'PDHPE:'; 
       return htmlOutput.evaluate();
     }if(e.parameter.Button10 == 'Account'){
-      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      // the if statement checks in the URL for the parameter of button10 and if it matches Account
       var htmlOuptut = HtmlService.createTemplateFromFile('Account');
       htmlOuptut.title = 'Account:' ;
       return htmlOuptut.evaluate();
@@ -211,37 +215,37 @@ function doPost(e){
       htmlOuptut.title = 'Physics:' ;
       return htmlOuptut.evaluate();
     }if(e.parameter.Button4== 'Login'){
-      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      // the if statement checks in the URL for the parameter of button4 and if it matches Login
       var htmlOuptut = HtmlService.createTemplateFromFile('Login');
       htmlOuptut.title = 'Login:' ;
       return htmlOuptut.evaluate();
     }if(e.parameter.Button5== 'Create'){
-      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      // the if statement checks in the URL for the parameter of button5 and if it matches Create
       var htmlOuptut = HtmlService.createTemplateFromFile('Create');
       htmlOuptut.title = 'Create:' ;
       return htmlOuptut.evaluate();
     }if(e.parameter.Button6== 'Settings'){
-      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      // the if statement checks in the URL for the parameter of button6 and if it matches Settings
       var htmlOuptut = HtmlService.createTemplateFromFile('Settings');
       htmlOuptut.title = 'Settings:' ;
       return htmlOuptut.evaluate();
     }if(e.parameter.Button7== 'Initial_Create'){
-      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      // the if statement checks in the URL for the parameter of button7 and if it matches Initial_Create
       var htmlOuptut = HtmlService.createTemplateFromFile('Initial_Create');
       htmlOuptut.title = 'Create:' ;
       return htmlOuptut.evaluate();
     }if(e.parameter.Button8== 'Initial_Login'){
-      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      // the if statement checks in the URL for the parameter of button8 and if it matches Initial Login
       var htmlOuptut = HtmlService.createTemplateFromFile('Initial_Login');
       htmlOuptut.title = 'Login:' ;
       return htmlOuptut.evaluate();
     }if(e.parameter.Button9== 'Score'){
-      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      // the if statement checks in the URL for the parameter of button9 and if it matches Score
       var htmlOuptut = HtmlService.createTemplateFromFile('Score');
       htmlOuptut.title = 'Score:' ;
       return htmlOuptut.evaluate();
     }if(e.parameter.Button10== 'Account'){
-      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      // the if statement checks in the URL for the parameter of button10 and if it matches Account
       var htmlOuptut = HtmlService.createTemplateFromFile('Account');
       htmlOuptut.title = 'Account:' ;
       return htmlOuptut.evaluate();
@@ -256,6 +260,7 @@ function doPost(e){
 
 
 function retrieveOverall(){
+  // This retrieves the score from the cache
   var cache = CacheService.getScriptCache();
   var uID = cache.get('UID');
   var row = parseInt(uID);
@@ -264,6 +269,7 @@ function retrieveOverall(){
 }
 
 function retrievePhysics(){
+  // This retrieves the score for physics from Cache
   var cache = CacheService.getScriptCache();
   var uID = cache.get('UID');
   var row = parseInt(uID);
@@ -272,6 +278,7 @@ function retrievePhysics(){
 }
 
 function retrievePdhpe(){
+  // Retrieves the score for Pe from cache
   var cache = CacheService.getScriptCache();
   var uID = cache.get('UID');
   var row = parseInt(uID);

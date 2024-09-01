@@ -14,13 +14,16 @@
     <form method="post" action="<?= url ?>" > 
       <button type="submit" class='btn' id="Create" value="Initial_Create" name="Button7">Create</button>
       <button type="submit" class='btn' id="Login" value="Initial_Login" name="Button8">Login</button>
+      <!-- Each button stores a different value and when clicked adjusts the link using the e.params -->
     </form>
 
         <div id="help">
       <h3 onclick="helpAlert()" > Click if stuck </h3>
     </div>
+    <!-- This is a simple clickable text element which summons the online help -->
 
     <h3 id="support"> </h3>
+    <!-- this empty text element is changed when the confirm aleart returns successful -->
 
 
     <script>
@@ -29,8 +32,10 @@
         alert("This page allows you to create a new account or Login to an existing account. \n For creating a new account click the Create Button or for Login click the Login button. \n \n Some common errors that can occur on this page is the button not redirecting you to a new website if this occurs then simply try to refresh the page and click the button again as sometimes google blocks page redirects.")
         confirmHelp()
       }
+      // This shows the info for online help then calls a confirm alert
 
       function confirmHelp() {
+        // This checks if they need further help
         var clicked;
         if (confirm("Do you need further information") == true) {
             clicked = " Here is some contact information for further requests, also use for errors, Email = mrjlenehan101@gmail.com, Mobile = 0409260964";

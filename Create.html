@@ -59,6 +59,7 @@
       // }
 
       function registerValidUser() {
+        // Creates a new account by first validating server side
         var email = document.getElementById('new-email').value;
         var password = document.getElementById('new-pwd').value;
         // Calls the server-side function to register the new user
@@ -69,13 +70,14 @@
             alert("Please enter a valid email and/or password ");
           }
         }
-      }
+      
 
       function setUserID(email){
         google.script.run.withSuccessHandler(initialiseScore).setUserID(email);
       }
 
       function initialiseScore(uID){
+        // This sets the scores to 0 for the new account
         google.script.run.initialiseScore(uID);
         document.getElementById("setting").click();
       }
@@ -92,11 +94,13 @@
       }
 
       function helpAlert(){
+        // this gets displayed when the help text is clicked
         alert("This page allows you to create a new account simply enter your details below. \n \n Some errors that could occur here are: \n - The Page doesn't redirect you if this occurs once clicking the register button then load the page again, as in not just a reload but a full close the website and re-open \n - Another instance that can occur is a duplicate account, you should get an alert and this says that the email is already in use, to fix this you need to change the email entered and resubmit.")
         confirmHelp()
       }
 
       function confirmHelp() {
+        // checks for further help
         var clicked;
         if (confirm("Do you need further information") == true) {
             clicked = " Here is some contact information for further requests, also use for errors, Email = mrjlenehan101@gmail.com, Mobile = 0409260964";
