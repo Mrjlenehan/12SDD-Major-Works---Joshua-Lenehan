@@ -5,6 +5,12 @@
     <base target="_top">
   </head>
   <body>
+
+    <form name="action" id="Account" method="post" action="<?= url ?>" > 
+      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
+      <input id="load" type="submit" class="btn" value="Account"name="Button10">
+    </form>
+
     <h1> QuizClimber </h1>
     <div>
       <h2> Welcome to the quiz application that was made for hsc students to practice multiple choice past hsc questions</h2>
@@ -23,10 +29,7 @@
 
   <div class="container">
 
-    <form name="action" method="post" action="<?= url ?>" > 
-      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
-      <input id="load" type="submit" class="btn" value="Account"name="Button10">
-    </form>
+
 
 
     <!-- Registration Form -->
@@ -93,7 +96,7 @@
       }
 
       function helpAlert(){
-        alert("Helpful information")
+        alert("This page allows you to create a new account simply enter your details below. \n \n Some errors that could occur here are: \n - The Page doesn't redirect you if this occurs once clicking the register button then load the page again, as in not just a reload but a full close the website and re-open \n - Another instance that can occur is a duplicate account, you should get an alert and this says that the email is already in use, to fix this you need to change the email entered and resubmit.")
         confirmHelp()
       }
 
@@ -141,7 +144,7 @@
 
   h1 {
     font-size: 4rem;
-    color: #4CAF50;
+    color: #003366;
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -195,6 +198,12 @@
     background-color: #7768B6;
     color: #E0F7FA;
     transform: scale(1.05);
+  }
+
+  
+  #Account{
+    margin-right:auto;
+    margin-left: 40px;
   }
 
   #help{

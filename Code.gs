@@ -195,6 +195,11 @@ function doPost(e){
       var htmlOutput =  HtmlService.createTemplateFromFile('PDHPE');
       htmlOutput.title = 'PDHPE:'; 
       return htmlOutput.evaluate();
+    }if(e.parameter.Button10 == 'Account'){
+      // the if statement checks in the URL for the parameter of button3 and if it matches Physics
+      var htmlOuptut = HtmlService.createTemplateFromFile('Account');
+      htmlOuptut.title = 'Account:' ;
+      return htmlOuptut.evaluate();
     }if(e.parameter.Button2 == 'Back To Home Screen'){
       // the if statement checks in the URL for the parameter of button2 and if it matches Back To Home Screen
       var htmlOuptut = HtmlService.createTemplateFromFile('Title');

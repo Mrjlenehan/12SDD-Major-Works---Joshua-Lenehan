@@ -6,9 +6,15 @@
 
   </head>
   <body>
+
+    <form name="action" method="post" id="AccountCss" action="<?= url ?>" > 
+      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
+      <input id="settings" type="submit" class="btn" value="Account"name="Button10">
+    </form>
+
     <h1> QuizClimber </h1>
     <div>
-      <h2> Welcome to the quiz application that was made for hsc students to practice multiple choice past hsc questions</h2>
+      <h2> Welcome Back, please log in to your existing account</h2>
     </div>
 
 
@@ -29,14 +35,11 @@
 
     <form name="action" method="post" action="<?= url ?>" style="display: none;"> 
       <!-- This sets the values that the google script is looking for in post to load the main page back up -->
-      <input id="setting" type="submit" class="btn" value="Account"name="Button10">
+      <input id="setting" type="submit" class="btn" value="Back To Home Screen"name="Button2">
     </form>
 
 
-    <form name="action" method="post" action="<?= url ?>" > 
-      <!-- This sets the values that the google script is looking for in post to load the main page back up -->
-      <input id="setting" type="submit" class="btn" value="Account"name="Button10">
-    </form>
+
 
     <div id="help">
       <h3 onclick="helpAlert()" > Click if stuck </h3>
@@ -67,7 +70,7 @@
         }
 
       function helpAlert(){
-        alert("Helpful information")
+        alert("This page allows returning users to log back in to their accounts using their email and password. \n \n Some errors that may occur are: \n - The subject selection page doesn't load when the login button is clicked, an alert should appear saying invalid credentials however it is possible that this didn't show. This means that the password entered doesn't correctly match the email entered or the email entered doesn't exist in the file. \n - Another issue that could occur is the page not loading when the correct information is entered this can occur when google doesn't load the page correctly or google blocks the redirect. To get around this reload the page and wait a minute before retrying")
         confirmHelp()
       }
 
@@ -112,7 +115,7 @@
 
   h1 {
     font-size: 4rem;
-    color: #4CAF50;
+    color: #003366;
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -186,6 +189,11 @@
     color: #CC5500;
   }
   
+  #AccountCss{
+    margin-right:auto;
+    margin-left: 40px;
+  }
+
 </style>
 
 
